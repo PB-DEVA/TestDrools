@@ -1,0 +1,22 @@
+package org.acme;
+
+unit PersonUnit; //This links this rule back to our RuleUnit
+
+import org.acme.domain.Person;
+
+rule "Is Adult"
+
+when
+
+  $p: /persons[age >= 18]; //Tests the age of any Person object in the datastore persons declared in the rule unit
+
+then
+
+  $p.setAdult(true);
+
+end
+query "adult" // Allows Kogito code-gen to expose a domain-driven api to search for adults.
+
+  $p: /persons;
+
+end
